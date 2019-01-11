@@ -1,5 +1,6 @@
 from service_classes import *
 from suburbs import *
+from grid_maker import *
 import time
 
 
@@ -84,7 +85,12 @@ print("And " + str(city_suburbs[-1].name) + " now has a size of " + str(city_sub
 time.sleep(2)
 print("Total population of " + city_name + " is currently " + str(tot_pop()))
 
+show_city_prompt()
 
+
+
+
+# TODO: how to build new buildings?
 """
 h1 = Hospital("Maks", "Howerton", 5, 20, 25, 3)
 p1 = CopShop("Howerton", 10, 2, 5, 4)
