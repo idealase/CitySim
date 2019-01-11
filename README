@@ -2,12 +2,26 @@
 # city.py
 #
 
-When suburb size reaches a set level, a new suburb will automatically be generated nearby
+Toy city simulator for practicing classes, modules, PEP 8 and version control
 
-The coverage of services and the level of wealth determines happiness levels
+MODULES:
 
-USER OPTIONS
-    (B)uild
-    (T)axes
-    (F)und
-    (P)rogress
+    service_classes.py - this is where I began, just revising classes, with some basic city services like police and fire.
+
+    suburbs.py - contains methods and data for suburbs class.
+
+    grid_maker.py - makes a 10x10 numpy meshgrid and performs plotting of suburbs.
+
+    city.py - the mostly text driven script to put it all together.
+
+
+
+TODO:
+    When suburb size reaches a set level, a new suburb will automatically be generated nearby
+    The coverage of services and the level of wealth determines happiness levels
+
+    USER OPTIONS
+        (B)uild
+        (T)axes
+        (F)und
+        (P)rogress
