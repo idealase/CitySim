@@ -60,8 +60,10 @@ set_diff()
 
 time.sleep(2)
 print("\n\nLet's establish the first suburb of the city of " + city_name)
+
 make_new_suburb()
 time.sleep(2)
+
 print("\nCongratulations, Mayor " + mayor_name + " your first suburb is...\n")
 time.sleep(2)
 see_city_suburbs()
