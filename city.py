@@ -91,6 +91,8 @@ show_city_prompt()
 
 
 
+print("The End!")
+
 
 # TODO: how to build new buildings?
 """

@@ -9,27 +9,30 @@ from suburbs import *
 
 
 def gen_grid():
+    # TODO: doc string
     global xx, yy
-    xvalues = np.arange(-5,6,1)
-    yvalues = np.arange(-5,6,1)
-    xx, yy = np.meshgrid(xvalues, yvalues)
+    x_values = np.arange(-5, 6, 1)
+    y_values = np.arange(-5, 6, 1)
+    xx, yy = np.meshgrid(x_values, y_values)
 
 
 def show_city():
+    # TODO: doc string
     gen_grid()
     # plot grid and suburbs
-    plt.figure(figsize=(10,10))
+    plt.figure(figsize=(10, 10))
     plt.plot(xx, yy, marker='.', color='k', linestyle='none')  # the mesh grid
 
     for k, (v1, v2) in subs_loc_dict.items():
         sub_radius = 100 * subs_size_dict[k]
-        plt.scatter(v1, v2, s = sub_radius, marker = 'o')  # the suburb
-        plt.annotate(k, xy= (v1,v2))  # adds suburb name as label
+        plt.scatter(v1, v2, s=sub_radius, marker='o')  # the suburb
+        plt.annotate(k, xy=(v1, v2))  # adds suburb name as label
 
     plt.show()
 
 
 def show_city_prompt():
+    # TODO: doc string
     answer = input("Would you like to view your city? y/n?")
     if answer.upper() == 'Y':
         print("OK, here it is...")
@@ -48,6 +51,7 @@ def main():
     print(subs_size_dict)
     see_city_suburbs()
     show_city()
+
 
 if __name__ == "__main__":
     main()
