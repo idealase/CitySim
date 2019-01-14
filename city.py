@@ -1,3 +1,7 @@
+#
+# city.py - runs the city sim
+#
+
 from service_classes import *
 from suburbs import *
 from grid_maker import *
@@ -71,12 +75,15 @@ mayor_name = input("What is your name?\n")
 print("Welcome to your new city, Mayor " + mayor_name)
 city_name = input("\nWhat would you like the city to be called?\n")
 
+waste_time = False
 welcome_msg = str("\n\nOk, Mayor " + mayor_name + ". Behold...\n   \n" + "***The City of " + city_name + "***\n\n")
-
-for char in welcome_msg:
-    sys.stdout.write(char)
-    sys.stdout.flush()
-    time.sleep(0.1)
+if waste_time:
+    for char in welcome_msg:
+        sys.stdout.write(char)
+        sys.stdout.flush()
+        time.sleep(0.1)
+else:
+    print(welcome_msg)
 
 
 set_diff()
@@ -86,6 +93,7 @@ print("\n\nLet's establish the first suburb of the city of " + city_name)
 
 make_new_suburb()
 #time.sleep(2)
+
 
 print("\nCongratulations, Mayor " + mayor_name + " your first suburb is...\n")
 #time.sleep(2)

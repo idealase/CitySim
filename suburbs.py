@@ -3,6 +3,7 @@
 #
 
 import random
+import pandas as pd
 
 # list of made up names to draw from when making new suburbs
 suburb_names = ["Weablo", "Glemdor", "Quamlack", "Tistle", "Marlbornry", "Flantiline", "Tennerbro", "Gwizzly", "Howerton",
@@ -13,6 +14,8 @@ city_suburbs = []
 full_suburbs = []
 subs_loc_dict = {}
 subs_size_dict = {}
+
+suburbs_df = pd.DataFrame()
 
 # suburb growth params
 # TODO: make growth_fac a suburb feature
@@ -50,6 +53,17 @@ class Suburb:
         eg rate=0.1 is equal to 10% shrinkage"""
         self.pop -= (self.pop * rate)
 
+    def init_append_df(self):
+        subname_pop = str(self.name) + ' Pop.'
+        suburbs_df.insert(0, subname_pop, self.pop)
+
+        subname_size = str(self.name) + ' Size.'
+        suburbs_df.insert(1, subname_size, self.size)
+
+        subname_wealth = str(self.name) + ' Wealth.'
+        suburbs_df.insert(2, subname_wealth, self.wealth)
+
+
 
 def make_new_suburb():
     """Generates a new empty suburb with ZERO wealth
@@ -68,6 +82,10 @@ def make_new_suburb():
     
     # make new suburb object with that name
     new_sub = Suburb(new_suburb_name, 0, 0, 0, new_coords)
+    
+    # TODO: Create new pd df for new suburb
+    new_sub.init_append_df()
+    
     city_suburbs.append(new_sub)
     subs_loc_dict[new_sub.name] = new_sub.coords
     subs_size_dict[new_sub.name] = new_sub.size
@@ -120,6 +138,7 @@ def make_adj_suburb(adj_to):
 
     # make new suburb object with that name
     new_sub = Suburb(new_suburb_name, rand_init_pop, 0, 0, new_coords)
+    # TODO: Create new pd df for new adjacent suburb
     city_suburbs.append(new_sub)
     subs_loc_dict[new_sub.name] = new_sub.coords
     subs_size_dict[new_sub.name] = new_sub.size
@@ -134,6 +153,7 @@ def expand_suburbs():
     print("\nCity Suburb Summary:")
     for s in city_suburbs:
         print(s.name, "\tPopulation: " + str(s.pop), sep="...")
+        # TODO: Store all suburb features in pandas SUBURBS DATAFRAMES at this point
 
     for s in city_suburbs:
         if s.size < expand_limit:
@@ -158,3 +178,4 @@ if __name__ == "__main__":
     print("main")
     make_new_suburb()
     print(new_sub.name, new_sub.pop, new_sub.wealth, new_sub.coords)
+    print(suburbs_df.head(5))
