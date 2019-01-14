@@ -33,13 +33,13 @@ def show_city():
 
 def show_city_prompt():
     # TODO: doc string
-    answer = input("Would you like to view your city? y/n?")
+    answer = input("\nWould you like to view your city? y/n?")
     if answer.upper() == 'Y':
-        print("OK, here it is...")
+        print("OK, here it is...\n")
         time.sleep(1)
         show_city()
     else:
-        print("OK then")
+        print("OK then...")
 
 
 def main():

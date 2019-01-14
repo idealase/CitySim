@@ -1,10 +1,18 @@
 from service_classes import *
 from suburbs import *
 from grid_maker import *
-import time
+import time, sys
+
+# TODO: global parameter specifications
 
 
 def set_diff():
+    """
+    Gives user a choice of easy, medium or hard difficulty.
+    Adjusts available funds accordingly
+
+    Sets a difficulty factor, diff_fac, to be used in later calculations.
+    """
     global money, diff_fac
     difficulty = input("How difficult do you want your game to be? Easy, medium or hard?").upper()
     if difficulty == "EASY":
@@ -25,17 +33,30 @@ def set_diff():
 
 
 def market_suburb():
+    """
+    Grants the user the option to spend some money to inject some population into
+    their NEWEST suburb -- city_suburbs[-1]
+    """
     global money
     ad_spend = input("How much would you like to spend on marketing your new suburb?\n")
-    tot_ads = int(int(ad_spend) / 1000)
-    money -= int(ad_spend)
-    i = 0
-    for i in range(tot_ads):
-        city_suburbs[-1].advertise()
-        i += 1
-    city_suburbs[-1].update_size()
+    try:
+        tot_ads = int(int(ad_spend) / 1000)
+        money -= int(ad_spend)
+        i = 0
+        for i in range(tot_ads):
+            city_suburbs[-1].advertise()
+            i += 1
+        city_suburbs[-1].update_size()
+    except ValueError:
+        print("Please enter a dollar amount with numbers, eg 1000, 2000")
+        market_suburb()
+    
+    
 
 def tot_pop():
+    """
+    Returns the total population of city
+    """
     global tot_pop
     tot_pop = 0
     for s in city_suburbs:
@@ -48,51 +69,90 @@ def tot_pop():
 
 mayor_name = input("What is your name?\n")
 print("Welcome to your new city, Mayor " + mayor_name)
-
 city_name = input("\nWhat would you like the city to be called?\n")
-print("Ok, Mayor " + mayor_name + " behold...\n")
-time.sleep(1)
-print("The city of " + city_name + "\n\n")
-time.sleep(1)
+
+welcome_msg = str("\n\nOk, Mayor " + mayor_name + ". Behold...\n   \n" + "***The City of " + city_name + "***\n\n")
+
+for char in welcome_msg:
+    sys.stdout.write(char)
+    sys.stdout.flush()
+    time.sleep(0.1)
 
 
 set_diff()
 
-time.sleep(2)
+#time.sleep(2)
 print("\n\nLet's establish the first suburb of the city of " + city_name)
 
 make_new_suburb()
-time.sleep(2)
+#time.sleep(2)
 
 print("\nCongratulations, Mayor " + mayor_name + " your first suburb is...\n")
-time.sleep(2)
+#time.sleep(2)
 see_city_suburbs()
-time.sleep(2)
+#time.sleep(2)
 print("\nIt is empty of course...\n\nBut you can advertise your new suburb!\n")
 print("For every $1000 spent on marketing, 50 people will move into the suburb")
-time.sleep(1)
+#time.sleep(1)
 
 market_suburb()
 
-print("Let's see how that worked...")
-time.sleep(2)
+print("\nLet's see how that worked...\n")
+#time.sleep(2)
 see_city_suburbs()
-time.sleep(1)
-print("So now, " + str(city_suburbs[-1].pop) + " people live in " + city_suburbs[-1].name + "!!!\n")
-time.sleep(1)
+#time.sleep(1)
+print("\nSo now, " + str(city_suburbs[-1].pop) + " people live in " + city_suburbs[-1].name + "!!!\n")
+#time.sleep(1)
 print("But now you only have $" + str(money) + " left to spend!\n")
-time.sleep(2)
+#time.sleep(2)
 print("And " + str(city_suburbs[-1].name) + " now has a size of " + str(city_suburbs[-1].size) + "!!!")
 
-time.sleep(2)
-print("Total population of " + city_name + " is currently " + str(tot_pop()))
+#time.sleep(2)
+print("\nTotal population of " + city_name + " is currently " + str(tot_pop()))
 
 show_city_prompt()
 
 
+def run_city():
+    """
+    Prompts user to input number of days to run city
+    
+    Performs expand_suburbs() method from suburbs.py for i=days
+    
+    Calls show_city_prompt() from grid_maker.py to check if user wants
+    to see city
+    """
+    run_days = 1
+    # take user input to set how many days the city will run for
+    run_days = int(input("How many days should we run the city for..?"))
 
-print("The End!")
+    # for as many days as run_days, run the expand suburbs function
+    for i in range(run_days):
+        expand_suburbs()
 
+    show_city_prompt()
+
+
+run_city()
+
+
+def keep_going():
+    global tot_pop
+    cont_status = input("\nWould you like to keep going? y/n?")
+    if cont_status.upper() == 'Y':
+        run_city()
+        keep_going()
+    elif cont_status.upper() == 'N':
+        try:
+            print("Total population of " + city_name + " reached " + str(tot_pop()))
+        except TypeError:
+            pass  #TODO: not do this
+        print("\nThe End!")
+    else:
+        print("\nThe End!")
+
+
+keep_going()
 
 # TODO: how to build new buildings?
 """
