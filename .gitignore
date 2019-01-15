@@ -106,4 +106,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+#my scratch file
+scratch.py
+
 # End of https://www.gitignore.io/api/windows,pycharm
