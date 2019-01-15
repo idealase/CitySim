@@ -75,7 +75,7 @@ mayor_name = input("What is your name?\n")
 print("Welcome to your new city, Mayor " + mayor_name)
 city_name = input("\nWhat would you like the city to be called?\n")
 
-waste_time = False
+waste_time = True
 welcome_msg = str("\n\nOk, Mayor " + mayor_name + ". Behold...\n   \n" + "***The City of " + city_name + "***\n\n")
 if waste_time:
     for char in welcome_msg:
@@ -93,10 +93,9 @@ print("\n\nLet's establish the first suburb of the city of " + city_name)
 
 make_new_suburb()
 #time.sleep(2)
-
-
 print("\nCongratulations, Mayor " + mayor_name + " your first suburb is...\n")
 #time.sleep(2)
+
 see_city_suburbs()
 #time.sleep(2)
 print("\nIt is empty of course...\n\nBut you can advertise your new suburb!\n")
@@ -104,11 +103,12 @@ print("For every $1000 spent on marketing, 50 people will move into the suburb")
 #time.sleep(1)
 
 market_suburb()
-
 print("\nLet's see how that worked...\n")
 #time.sleep(2)
+
 see_city_suburbs()
 #time.sleep(1)
+
 print("\nSo now, " + str(city_suburbs[-1].pop) + " people live in " + city_suburbs[-1].name + "!!!\n")
 #time.sleep(1)
 print("But now you only have $" + str(money) + " left to spend!\n")
@@ -130,7 +130,8 @@ def run_city():
     Calls show_city_prompt() from grid_maker.py to check if user wants
     to see city
     """
-    run_days = 1
+
+    run_days = 1  # default
     # take user input to set how many days the city will run for
     run_days = int(input("How many days should we run the city for..?"))
 
