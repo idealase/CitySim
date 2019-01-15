@@ -63,6 +63,16 @@ class Suburb:
         sub_name_wealth = str(self.name) + ' Wealth.'
         suburbs_df.insert(2, sub_name_wealth, self.wealth)
 
+    def append_to_df(self):
+        # TODO: Fix this. doesnt work
+        sub_name_pop = str(self.name) + ' Pop.'
+        suburbs_df.append(sub_name_pop, self.pop)
+
+        sub_name_size = str(self.name) + ' Size.'
+        suburbs_df.append(sub_name_size, self.size)
+
+        sub_name_wealth = str(self.name) + ' Wealth.'
+        suburbs_df.append(sub_name_wealth, self.wealth)
 
 
 def make_new_suburb():
@@ -139,6 +149,7 @@ def make_adj_suburb(adj_to):
     # make new suburb object with that name
     new_sub = Suburb(new_suburb_name, rand_init_pop, 0, 0, new_coords)
     # TODO: Create new pd df for new adjacent suburb
+
     city_suburbs.append(new_sub)
     subs_loc_dict[new_sub.name] = new_sub.coords
     subs_size_dict[new_sub.name] = new_sub.size
