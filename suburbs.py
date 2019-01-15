@@ -178,4 +178,9 @@ if __name__ == "__main__":
     print("main")
     make_new_suburb()
     print(new_sub.name, new_sub.pop, new_sub.wealth, new_sub.coords)
+    new_sub.pop = 5
+    print(suburbs_df.head(5))
+
+    for i in range(50):
+        expand_suburbs()
     print(suburbs_df.head(5))
