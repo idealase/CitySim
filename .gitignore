@@ -109,4 +109,14 @@ $RECYCLE.BIN/
 #my scratch file
 scratch.py
 
+# folders
+.idea/
+.ipynb_checkpoints/
+.vscode/
+venv/
+__pycache__/
+
+# unused files
+svc_buildingclass.py
+
 # End of https://www.gitignore.io/api/windows,pycharm
