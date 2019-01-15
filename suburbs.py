@@ -53,15 +53,15 @@ class Suburb:
         eg rate=0.1 is equal to 10% shrinkage"""
         self.pop -= (self.pop * rate)
 
-    def init_append_df(self):
-        subname_pop = str(self.name) + ' Pop.'
-        suburbs_df.insert(0, subname_pop, self.pop)
+    def insert_to_df(self):
+        sub_name_pop = str(self.name) + ' Pop.'
+        suburbs_df.insert(0, sub_name_pop, self.pop)
 
-        subname_size = str(self.name) + ' Size.'
-        suburbs_df.insert(1, subname_size, self.size)
+        sub_name_size = str(self.name) + ' Size.'
+        suburbs_df.insert(1, sub_name_size, self.size)
 
-        subname_wealth = str(self.name) + ' Wealth.'
-        suburbs_df.insert(2, subname_wealth, self.wealth)
+        sub_name_wealth = str(self.name) + ' Wealth.'
+        suburbs_df.insert(2, sub_name_wealth, self.wealth)
 
 
 
@@ -84,7 +84,7 @@ def make_new_suburb():
     new_sub = Suburb(new_suburb_name, 0, 0, 0, new_coords)
     
     # TODO: Create new pd df for new suburb
-    new_sub.init_append_df()
+    new_sub.insert_to_df()
     
     city_suburbs.append(new_sub)
     subs_loc_dict[new_sub.name] = new_sub.coords
@@ -134,7 +134,7 @@ def make_adj_suburb(adj_to):
 
     gen_new_coords(adj_to)
 
-    rand_init_pop = random.randint(25,100)
+    rand_init_pop = random.randint(25, 100)
 
     # make new suburb object with that name
     new_sub = Suburb(new_suburb_name, rand_init_pop, 0, 0, new_coords)
