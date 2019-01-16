@@ -25,7 +25,7 @@ def show_city():
 
     for k, (v1, v2) in subs_loc_dict.items():
         sub_radius = 100 * subs_size_dict[k]
-        plt.scatter(v1, v2, s=sub_radius, marker='o')  # the suburb
+        plt.scatter(v1, v2, s=sub_radius, marker='o', alpha=0.3)  # the suburb
         plt.annotate(k, xy=(v1, v2))  # adds suburb name as label
 
     plt.show()
