@@ -106,7 +106,7 @@ def make_new_suburb():
     # TODO: adding this info to city_df
     city_df.rename(index=str, columns={"Sub1 Pop": str(new_sub.name) + " Pop.", "Sub1 Wealth": str(new_sub.name) + " Wealth", \
     "Sub1 Size": str(new_sub.name) + " Size", "Sub1 Density": str(new_sub.name) + " Density", \
-    "Sub1 GrowthFactor": str(new_sub.name) + " GrowthFactor"}, inplace=True)
+    "Sub1 GrowthFactor": str(new_sub.name) + " GrowthFac"}, inplace=True)
 
 
 def gen_new_coords(adj_to):
@@ -167,11 +167,18 @@ def make_adj_suburb(adj_to):
 
     # make new suburb object with that name
     new_sub = Suburb(new_suburb_name, rand_init_pop, 0, 0, new_coords)
-    # TODO: Create new pd df for new adjacent suburb
+    # TODO: Create new pd df for new adjacent suburb... ?? maybe not
 
     city_suburbs.append(new_sub)
     subs_loc_dict[new_sub.name] = new_sub.coords
     subs_size_dict[new_sub.name] = new_sub.size
+
+    # TODO: add new cols to city_df
+    city_df[str(new_sub.name) + " Pop."] = ""
+    city_df[str(new_sub.name) + " Wealth"] = ""
+    city_df[str(new_sub.name) + " Size"] = ""
+    city_df[str(new_sub.name) + " Density"] = ""
+    city_df[str(new_sub.name) + " GrowthFac"] = ""
 
 
 def expand_suburbs():
@@ -213,9 +220,11 @@ if __name__ == "__main__":
     print(suburbs_df.head(5))
     print(city_df.head(5))
 
-    for i in range(5):
+    for i in range(50):
         expand_suburbs()
 
-    print(current_day)
+    print("City ran for " + str(current_day) + " days")
     print(suburbs_df.head(5))
     print(city_df.head(5))
+
+    print(city_df.iloc[49])
