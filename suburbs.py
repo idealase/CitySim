@@ -15,6 +15,8 @@ full_suburbs = []
 subs_loc_dict = {}
 subs_size_dict = {}
 
+current_day = 0
+
 suburbs_df = pd.DataFrame()
 
 city_df = pd.read_csv('City_Records_Test.csv')
@@ -178,10 +180,15 @@ def expand_suburbs():
     When suburb reaches expand_limit it stops expanding and
     a new suburb is generated nearby
     """
+    global current_day
+    current_day +=1
     print("\nCity Suburb Summary:")
     for s in city_suburbs:
-        print(s.name, "\tPopulation: " + str(s.pop), sep="...")
-        # TODO: Store all suburb features in pandas SUBURBS DATAFRAMES at this point
+        print(s.name, "\tPopulation: " + str(s.pop), sep="...")  # TODO: remove this when finished testing
+        # TODO: Store all suburb attributes in pandas SUBURBS DATAFRAMES at this point
+        city_df.loc[str(current_day), (str(s.name) + " Pop.")] = s.pop
+
+
 
     for s in city_suburbs:
         if s.size < expand_limit:
@@ -206,8 +213,9 @@ if __name__ == "__main__":
     print(suburbs_df.head(5))
     print(city_df.head(5))
 
-    for i in range(50):
+    for i in range(5):
         expand_suburbs()
 
+    print(current_day)
     print(suburbs_df.head(5))
     print(city_df.head(5))
