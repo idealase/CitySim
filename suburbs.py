@@ -18,6 +18,7 @@ subs_size_dict = {}
 suburbs_df = pd.DataFrame()
 
 city_df = pd.read_csv('City_Records_Test.csv')
+city_df.set_index('Day', drop=True, inplace=True)
 
 # suburb growth params
 # TODO: make growth_fac a suburb feature
@@ -93,12 +94,17 @@ def make_new_suburb():
     # make new suburb object with that name
     new_sub = Suburb(new_suburb_name, 0, 0, 0, new_coords)
     
-    # TODO: Create new pd df for new suburb
-    new_sub.insert_to_df()
+    # TODO: Consider removing this feature
+    new_sub.insert_to_df()  #FIXME: not doing anything
     
     city_suburbs.append(new_sub)
     subs_loc_dict[new_sub.name] = new_sub.coords
     subs_size_dict[new_sub.name] = new_sub.size
+
+    # TODO: adding this info to city_df
+    city_df.rename(index=str, columns={"Sub1 Pop": str(new_sub.name) + " Pop.", "Sub1 Wealth": str(new_sub.name) + " Wealth", \
+    "Sub1 Size": str(new_sub.name) + " Size", "Sub1 Density": str(new_sub.name) + " Density", \
+    "Sub1 GrowthFactor": str(new_sub.name) + " GrowthFactor"}, inplace=True)
 
 
 def gen_new_coords(adj_to):
