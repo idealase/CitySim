@@ -119,4 +119,10 @@ __pycache__/
 # unused files
 svc_buildingclass.py
 
+# docker
+.dockerignore
+docker-compose.debug.yml
+docker-compose.yml
+Dockerfile
+
 # End of https://www.gitignore.io/api/windows,pycharm
