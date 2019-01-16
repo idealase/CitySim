@@ -9,7 +9,7 @@ from suburbs import *
 
 
 def gen_grid():
-    # TODO: doc string
+    """Generates xx and yy for 10x10 grid on which suburbs are plotted"""
     global xx, yy
     x_values = np.arange(-5, 6, 1)
     y_values = np.arange(-5, 6, 1)
@@ -17,7 +17,7 @@ def gen_grid():
 
 
 def show_city():
-    # TODO: doc string
+    """Generates 10x10 grid and plots suburbs at their coords w/ name"""
     gen_grid()
     # plot grid and suburbs
     plt.figure(figsize=(10, 10))
@@ -25,14 +25,14 @@ def show_city():
 
     for k, (v1, v2) in subs_loc_dict.items():
         sub_radius = 100 * subs_size_dict[k]
-        plt.scatter(v1, v2, s=sub_radius, marker='o', alpha=0.3)  # the suburb
+        plt.scatter(v1, v2, s=sub_radius, marker='o', alpha=0.3)  # the suburb TODO: relate alpha suburb density
         plt.annotate(k, xy=(v1, v2))  # adds suburb name as label
 
     plt.show()
 
 
 def show_city_prompt():
-    # TODO: doc string
+    "Give user the option to see the plot. Calls show_city()"
     answer = input("\nWould you like to view your city? y/n?")
     if answer.upper() == 'Y':
         print("OK, here it is...\n")
