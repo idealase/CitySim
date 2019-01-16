@@ -44,13 +44,11 @@ class Suburb:
         self.pop += 50
 
     def grow_pop(self, rate):
-        """Grows population at specified rate
-        eg rate=0.1 is equal to 10% growth"""
+        """Grows population at specified rate; eg rate=0.1 is equal to 10% growth"""
         self.pop += int((self.pop * rate))
 
     def shrink_pop(self, rate):
-        """Shrinks population at specified rate
-        eg rate=0.1 is equal to 10% shrinkage"""
+        """Shrinks population at specified rate; eg rate=0.1 is equal to 10% shrinkage"""
         self.pop -= (self.pop * rate)
 
     def insert_to_df(self):
@@ -102,8 +100,15 @@ def make_new_suburb():
 
 
 def gen_new_coords(adj_to):
-    """
-    takes adj_to arg, which is the suburb the new one will grow next to
+    """Generates the coordinates of the new suburb
+    Moves both x and y randomly either (-2,-1,0,1,2) places
+
+    Performs two checks:
+        one to make coords unique
+        one to restrict to 10x10
+
+    Keyword arguments:
+    adj_to -- the <suburb> the new one will be adjacent to
     """
     global new_coords
     movements = [1,-1,2,-2,0]  # list of possible movement directions
@@ -113,6 +118,7 @@ def gen_new_coords(adj_to):
     new_coords = (adj_to.coords)[0] + adj_sub_movementx, (adj_to.coords)[1] + adj_sub_movementy
     
     # prevent suburbs forming beyond grid
+    # FIXME: possibly not working in all cases
     if -5 > new_coords[0] > 5 or -5 > new_coords[1] > 5:
         gen_new_coords(adj_to)
     
@@ -125,12 +131,15 @@ def gen_new_coords(adj_to):
 
 
 def make_adj_suburb(adj_to):
-    """Generates a new empty suburb with ZERO wealth
-    and INITIAL population 25-100.
+    """Generates a new empty suburb adjacent to full one. 
+    With ZERO wealth and random INITIAL population 25-100.
     Randomly selects name from suburb_names list and removes that name from list
-    Puts suburb next to most recent suburb
+    Puts suburb next to most recent suburb with gen_new_coords() func.
     
-    PROBLEM: Suburbs beging to extend beyond the initial grid"""
+    Keyword arguments:
+    adj_to -- the <suburb> the new one will be adjacent to
+        passed to gen_new_coords(adj_to)
+    """
     global new_suburb_name, new_sub, new_coords
 
     # randomly choose suburb name from list
@@ -176,11 +185,7 @@ def expand_suburbs():
 
 
 def see_city_suburbs():
-    """
-    prints full stats of all suburbs
-
-    used mostly for early testing
-    """
+    """Prints full stats of all suburbs; used mostly for early testing"""
     for s in city_suburbs:
         print(s.name, "Population: " + str(s.pop), "Wealth: " + str(s.wealth), "Size: " + str(s.size), "Location: " + str(s.coords), sep="...")
 
