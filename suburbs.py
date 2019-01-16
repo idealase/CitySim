@@ -233,3 +233,5 @@ if __name__ == "__main__":
     print(city_df.tail(5))
 
     print(city_df.iloc[49])
+
+    city_df.to_csv('city_df_tests/test.csv')
