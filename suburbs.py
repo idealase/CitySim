@@ -19,7 +19,7 @@ current_day = 0
 
 suburbs_df = pd.DataFrame()
 
-city_df = pd.read_csv('City_Records_Test.csv')
+city_df = pd.read_csv('City_Records_Template.csv')
 city_df.set_index('Day', drop=True, inplace=True)
 
 # suburb growth params
@@ -106,7 +106,7 @@ def make_new_suburb():
     # TODO: adding this info to city_df
     city_df.rename(index=str, columns={"Sub1 Pop": str(new_sub.name) + " Pop.", "Sub1 Wealth": str(new_sub.name) + " Wealth", \
     "Sub1 Size": str(new_sub.name) + " Size", "Sub1 Density": str(new_sub.name) + " Density", \
-    "Sub1 GrowthFactor": str(new_sub.name) + " GrowthFac"}, inplace=True)
+    "Sub1 GrowthFac": str(new_sub.name) + " GrowthFac"}, inplace=True)
 
 
 def gen_new_coords(adj_to):
@@ -194,6 +194,9 @@ def expand_suburbs():
         print(s.name, "\tPopulation: " + str(s.pop), sep="...")  # TODO: remove this when finished testing
         # TODO: Store all suburb attributes in pandas SUBURBS DATAFRAMES at this point
         city_df.loc[str(current_day), (str(s.name) + " Pop.")] = s.pop
+        city_df.loc[str(current_day), (str(s.name) + " Wealth")] = s.wealth
+        city_df.loc[str(current_day), (str(s.name) + " Size")] = s.size
+        city_df.loc[str(current_day), (str(s.name) + " GrowthFac")] = growth_fac
 
 
 
