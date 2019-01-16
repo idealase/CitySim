@@ -224,7 +224,7 @@ if __name__ == "__main__":
     print(suburbs_df.head(5))
     print(city_df.head(5))
 
-    for i in range(50):
+    for i in range(50):  # the value chosen here has unexpected effects on df performance???
         expand_suburbs()
 
     print("City ran for " + str(current_day) + " days")
