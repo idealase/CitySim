@@ -173,7 +173,7 @@ def make_adj_suburb(adj_to):
     subs_loc_dict[new_sub.name] = new_sub.coords
     subs_size_dict[new_sub.name] = new_sub.size
 
-    # TODO: add new cols to city_df
+    # assiging new cols to city_df for new suburb
     city_df[str(new_sub.name) + " Pop."] = ""
     city_df[str(new_sub.name) + " Wealth"] = ""
     city_df[str(new_sub.name) + " Size"] = ""
@@ -193,6 +193,7 @@ def expand_suburbs():
     for s in city_suburbs:
         print(s.name, "\tPopulation: " + str(s.pop), sep="...")  # TODO: remove this when finished testing
         # TODO: Store all suburb attributes in pandas SUBURBS DATAFRAMES at this point
+        # FIXME: this isn't working... related to no. iterations????
         city_df.loc[str(current_day), (str(s.name) + " Pop.")] = s.pop
         city_df.loc[str(current_day), (str(s.name) + " Wealth")] = s.wealth
         city_df.loc[str(current_day), (str(s.name) + " Size")] = s.size
@@ -219,7 +220,7 @@ if __name__ == "__main__":
     print("main\n Testing dfs")
     make_new_suburb()
     print(new_sub.name, new_sub.pop, new_sub.wealth, new_sub.coords)
-    new_sub.pop = 5
+    new_sub.pop = 10
     print(suburbs_df.head(5))
     print(city_df.head(5))
 
@@ -229,5 +230,6 @@ if __name__ == "__main__":
     print("City ran for " + str(current_day) + " days")
     print(suburbs_df.head(5))
     print(city_df.head(5))
+    print(city_df.tail(5))
 
     print(city_df.iloc[49])
