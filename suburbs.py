@@ -17,6 +17,8 @@ subs_size_dict = {}
 
 suburbs_df = pd.DataFrame()
 
+city_df = pd.read_csv('City_Records_Test.csv')
+
 # suburb growth params
 # TODO: make growth_fac a suburb feature
 growth_fac = 0.3  # set between 0 and 1
@@ -191,12 +193,15 @@ def see_city_suburbs():
 
 
 if __name__ == "__main__":
-    print("main")
+    print("main\n Testing dfs")
     make_new_suburb()
     print(new_sub.name, new_sub.pop, new_sub.wealth, new_sub.coords)
     new_sub.pop = 5
     print(suburbs_df.head(5))
+    print(city_df.head(5))
 
     for i in range(50):
         expand_suburbs()
+
     print(suburbs_df.head(5))
+    print(city_df.head(5))
