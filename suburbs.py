@@ -168,10 +168,6 @@ def expand_suburbs():
     """
     global current_day
     current_day +=1
-
-    print("\nCity Suburb Summary:")
-    for s in city_suburbs:
-        print(s.name, "\tPopulation: " + str(s.pop), sep="...")  # TODO: remove this when finished testing
     
     # FIXME: this isn't working... related to no. iterations????
     for s in city_suburbs:
@@ -211,6 +207,7 @@ if __name__ == "__main__":
     print(city_df.head(5))
     print(city_df.tail(5))
     print(city_df.iloc[49])
+    
     test_csv_name = 'city_df_tests/test.csv'
     city_df.to_csv(test_csv_name)
 
