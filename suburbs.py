@@ -28,7 +28,9 @@ city_df.set_index('Day', drop=True, inplace=True)
 growth_fac = 0.2  # set between 0 and 1
 expand_limit = 20  # size at which suburb stops expanding and makes new suburb
 density_thresh = 0.51
+
 base_wealth = 10
+wealth_growf = 0.01
 
 class Suburb:
     def __init__(self, name, pop, wealth, size, density, coords, growf):
@@ -45,19 +47,19 @@ class Suburb:
         subs_size_dict[self.name] = self.size
 
     def update_density(self):
-        self.density = min((self.pop / (expand_limit * 150)), 1) 
+        self.density = min((self.pop / (expand_limit * 300)), 1) 
         subs_dens_dict[self.name] = self.density
 
     def update_growf(self):
         if self.density > density_thresh:
-            dens_mod = (self.density * 3) ** 2
-            self.growf = self.growf / dens_mod  # this is a pretty aggressive approach
+            dens_mod = ((self.density * 2) ** 4) / 1000
+            self.growf -= dens_mod 
 
     def wealth_up(self):
-        self.wealth += (self.wealth * 0.01)
+        self.wealth += (self.wealth * wealth_growf)
 
     def wealth_down(self):
-        self.wealth -= (self.wealth * 0.01)
+        self.wealth -= (self.wealth * wealth_growf)
 
     def advertise(self):
         "Initialises suburb population when in city.py"
@@ -182,9 +184,17 @@ def expand_suburbs():
             s.update_size()
             s.update_density()
             s.update_growf()
+            s.wealth_up()
         elif (s.size >= expand_limit) and s not in full_suburbs:
             make_adj_suburb(s)
             full_suburbs.append(s)
+
+    for s in full_suburbs:
+        s.grow_pop(rate=(growth_fac / 5))
+        s.update_size()
+        s.update_density()
+        s.update_growf()
+        s.wealth_up()
 
 
 def see_city_suburbs():
