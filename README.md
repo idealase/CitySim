@@ -14,7 +14,8 @@
 + service_classes.py - this is where I began, just revising classes, with some basic city services like police and fire.
     currently still unused
 
-
+### Example Plot:
+    NB: Suburb density not mapped to alpha in this example
 ![image](https://user-images.githubusercontent.com/24471071/51315742-2f51ab80-1a53-11e9-9cb0-c72499380215.png)
 
 ### TODO:
