@@ -37,6 +37,5 @@ NB: Suburb density not mapped to alpha in this example
 
 ### TODO:
 1. The coverage of services, suburb density and the level of wealth determines happiness levels
-
-        happiness levels determine growth factor
+happiness levels determine growth factor
 
