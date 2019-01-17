@@ -24,7 +24,6 @@ city_df = pd.read_csv('City_Records_Template.csv')
 city_df.set_index('Day', drop=True, inplace=True)
 
 # suburb growth params
-# TODO: make growth_fac a suburb specific attribute
 growth_fac = 0.3  # set between 0 and 1
 expand_limit = 20  # size at which suburb stops expanding and makes new suburb
 density_thresh = 0.51
