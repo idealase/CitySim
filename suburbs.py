@@ -28,6 +28,7 @@ city_df.set_index('Day', drop=True, inplace=True)
 growth_fac = 0.2  # set between 0 and 1
 expand_limit = 20  # size at which suburb stops expanding and makes new suburb
 density_thresh = 0.51
+base_wealth = 10
 
 class Suburb:
     def __init__(self, name, pop, wealth, size, density, coords, growf):
@@ -53,10 +54,10 @@ class Suburb:
             self.growf = self.growf / dens_mod  # this is a pretty aggressive approach
 
     def wealth_up(self):
-        self.wealth += (self.wealth * 0.1)
+        self.wealth += (self.wealth * 0.01)
 
     def wealth_down(self):
-        self.wealth -= (self.wealth * 0.1)
+        self.wealth -= (self.wealth * 0.01)
 
     def advertise(self):
         "Initialises suburb population when in city.py"
@@ -72,7 +73,7 @@ class Suburb:
 
 
 def make_new_suburb():
-    """Generates a new empty suburb with ZERO wealth and ZERO population.
+    """Generates a new empty suburb with TEN wealth and ZERO population.
     Randomly selects name from suburb_names list and removes that name from list"""
     global new_suburb_name, new_sub
     
@@ -83,7 +84,7 @@ def make_new_suburb():
     new_coords = (random.randint(-2,2), random.randint(-2,2))
     
     # make new suburb object with that name
-    new_sub = Suburb(new_suburb_name, 0, 0, 0, 0.1, new_coords, growth_fac)
+    new_sub = Suburb(new_suburb_name, 0, base_wealth, 0, 0.1, new_coords, growth_fac)
     city_suburbs.append(new_sub)
     subs_loc_dict[new_sub.name] = new_sub.coords
     subs_size_dict[new_sub.name] = new_sub.size
@@ -128,7 +129,7 @@ def gen_new_coords(adj_to):
 
 def make_adj_suburb(adj_to):
     """Generates a new empty suburb adjacent to full one. 
-    With ZERO wealth and random INITIAL population 25-100.
+    With TEN wealth and random INITIAL population 25-100.
     Randomly selects name from suburb_names list and removes that name from list
     Puts suburb next to most recent suburb with gen_new_coords() func.
     
@@ -148,7 +149,7 @@ def make_adj_suburb(adj_to):
     gen_new_coords(adj_to)  # passes own adj_to arg to gen_new_coords(adj_to)
     rand_init_pop = random.randint(25, 100)
 
-    new_sub = Suburb(new_suburb_name, rand_init_pop, 0, 0, 0.2, new_coords, growth_fac)
+    new_sub = Suburb(new_suburb_name, rand_init_pop, base_wealth, 0, 0.2, new_coords, growth_fac)
     city_suburbs.append(new_sub)
     subs_loc_dict[new_sub.name] = new_sub.coords
     subs_size_dict[new_sub.name] = new_sub.size
@@ -229,7 +230,7 @@ if __name__ == "__main__":
     #plt.subplot(2,2,2) 
     growf_df.plot()
     #plt.subplot(2,2,3) 
-    #wealth_df.plot()
+    wealth_df.plot()
     #plt.subplot(2,2,4) 
     density_df.plot()
 
