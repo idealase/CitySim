@@ -18,22 +18,25 @@
     currently still unused
     
 #### Running CitySim:
-  
-    RUN city.py for basic functionality
-        You will be prompted for your name and the city's name
-        The difficulty prompt is currently pointless, so you can select 'hard'
-        When prompted for days to run city, 30 days is a nice amount (not 50000, Karen)
-    Running suburbs.py and its main() will produce some data frames but no plots
-    Running grid_maker.py will check grid functionality, but all suburbs on grid will have size:0
+
+RUN city.py for basic functionality
+    
+You will be prompted for your name and the city's name
+The difficulty prompt is currently pointless, so you can select 'hard'
+When prompted for days to run city, 30 days is a nice amount (not 50000, Karen)
+        
+Running suburbs.py and its main() will produce some data frames but no plots
+    
+Running grid_maker.py will check grid functionality, but all suburbs on grid will have size:0
 
 ### Example Plot:
     
-    NB: Suburb density not mapped to alpha in this example
+NB: Suburb density not mapped to alpha in this example
     
 ![image](https://user-images.githubusercontent.com/24471071/51315742-2f51ab80-1a53-11e9-9cb0-c72499380215.png)
 
 ### TODO:
 1. The coverage of services, suburb density and the level of wealth determines happiness levels
 
-    happiness levels determine growth factor
+        happiness levels determine growth factor
 
