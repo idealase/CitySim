@@ -22,7 +22,7 @@ city_df = pd.read_csv('City_Records_Template.csv')
 city_df.set_index('Day', drop=True, inplace=True)
 
 # suburb growth params
-# TODO: make growth_fac a suburb feature
+# TODO: make growth_fac a suburb specific attribute
 growth_fac = 0.3  # set between 0 and 1
 expand_limit = 20  # size at which suburb stops expanding and makes new suburb
 
@@ -40,6 +40,9 @@ class Suburb:
         self.size = self.pop / 100
         subs_size_dict[self.name] = self.size
 
+    def update_density(self):
+        pass  # TODO: determine calc for density
+
     def wealth_up(self):
         self.wealth += (self.wealth * 0.1)
 
@@ -47,6 +50,7 @@ class Suburb:
         self.wealth -= (self.wealth * 0.1)
 
     def advertise(self):
+        "Initialises suburb population when in city.py"
         self.pop += 50
 
     def grow_pop(self, rate):
@@ -59,15 +63,11 @@ class Suburb:
 
 
 def make_new_suburb():
-    """Generates a new empty suburb with ZERO wealth
-    and ZERO population.
+    """Generates a new empty suburb with ZERO wealth and ZERO population.
     Randomly selects name from suburb_names list and removes that name from list"""
     global new_suburb_name, new_sub
     
-    # randomly choose suburb name from list
     new_suburb_name = random.choice(suburb_names)
-    
-    # remove that name from list
     suburb_names.remove(new_suburb_name)
 
     # determine new random coords for suburb
@@ -75,13 +75,11 @@ def make_new_suburb():
     
     # make new suburb object with that name
     new_sub = Suburb(new_suburb_name, 0, 0, 0, 0.1, new_coords, growth_fac)
-    
-    
     city_suburbs.append(new_sub)
     subs_loc_dict[new_sub.name] = new_sub.coords
     subs_size_dict[new_sub.name] = new_sub.size
 
-    # TODO: adding this info to city_df
+    # replacing template column names with those of new suburb
     city_df.rename(index=str, columns={"Sub1 Pop": str(new_sub.name) + " Pop.", "Sub1 Wealth": str(new_sub.name) + " Wealth", \
     "Sub1 Size": str(new_sub.name) + " Size", "Sub1 Density": str(new_sub.name) + " Density", \
     "Sub1 GrowthFac": str(new_sub.name) + " GrowthFac"}, inplace=True)
@@ -105,7 +103,7 @@ def gen_new_coords(adj_to):
     # determine new adjacent coords for suburb
     new_coords = (adj_to.coords)[0] + adj_sub_movementx, (adj_to.coords)[1] + adj_sub_movementy
     
-    # prevent suburbs forming beyond grid
+    # restrict to 10x10
     # FIXME: possibly not working in all cases
     if -5 > new_coords[0] > 5 or -5 > new_coords[1] > 5:
         gen_new_coords(adj_to)
@@ -135,26 +133,19 @@ def make_adj_suburb(adj_to):
         new_suburb_name = random.choice(suburb_names)
     except IndexError:
         print("...the populace are out of names for new suburbs...")
-        
-    # remove that name from list
+
     suburb_names.remove(new_suburb_name)
-
-    gen_new_coords(adj_to)
-
+    gen_new_coords(adj_to)  # passes own adj_to arg to gen_new_coords(adj_to)
     rand_init_pop = random.randint(25, 100)
 
-    # make new suburb object with that name
     new_sub = Suburb(new_suburb_name, rand_init_pop, 0, 0, 0.2, new_coords, growth_fac)
-    # TODO: Create new pd df for new adjacent suburb... ?? maybe not
-
     city_suburbs.append(new_sub)
     subs_loc_dict[new_sub.name] = new_sub.coords
     subs_size_dict[new_sub.name] = new_sub.size
 
     # assiging new cols to city_df for new suburb
-    first_cols = [" Pop.", " Wealth", " Size", " Density", " GrowthFac"]
-
-    for col in first_cols:
+    new_cols = [" Pop.", " Wealth", " Size", " Density", " GrowthFac"]
+    for col in new_cols:
         city_df[str(new_sub.name) + col] = ""
    
 
@@ -205,7 +196,6 @@ if __name__ == "__main__":
     print("City ran for " + str(current_day) + " days")
     print(city_df.head(5))
     print(city_df.tail(5))
-
     print(city_df.iloc[49])
 
     city_df.to_csv('city_df_tests/test.csv')
