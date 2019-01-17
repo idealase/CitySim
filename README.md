@@ -14,6 +14,9 @@
 + service_classes.py - this is where I began, just revising classes, with some basic city services like police and fire.
     currently still unused
 
+
+![alt text](ex_plot.png "Description goes here")
+
 ### TODO:
 1. The coverage of services, suburb density and the level of wealth determines happiness levels
 
