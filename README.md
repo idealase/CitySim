@@ -1,8 +1,9 @@
 # CitySim
 ### Toy parametric city simulator for practicing classes, modules, PEP 8 and version control
 
-#### Dependencies:
-    The scipy packages pandas, numpy and matplotlib
+#### Developed with:
++ Python 3.7
++ The scipy packages pandas, numpy and matplotlib
     
 #### MODULES:
 + city.py - the mostly text driven script to put it all together.
