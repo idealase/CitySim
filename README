@@ -1,24 +1,4 @@
-#
-# city.py
-#
-
 Toy parametric city simulator for practicing classes, modules, PEP 8 and version control
-
-Project History:
-
-I wanted to play with while loops so I made this function:
-
-    def grow():
-        ournumber = 0
-        while ournumber < 10:
-            ournumber += 1
-
-From there I made a function to check if ournumber was currently 10...
-Then I set conditions to be satisfied before growth could occur eg:
-    if something:
-        grow()
-Around this point I started imagining ournumber as a city's population, and from this basic framework I began expanding...
-
 
 MODULES:
     city.py - the mostly text driven script to put it all together.
@@ -32,8 +12,6 @@ MODULES:
 
     service_classes.py - this is where I began, just revising classes, with some basic city services like police and fire.
         currently still unused
-
-
 
 TODO:
     The coverage of services, suburb density and the level of wealth determines happiness levels
