@@ -50,8 +50,8 @@ class Suburb:
 
     def update_growf(self):
         if self.density > density_thresh:
-            dens_mod = (self.density * 2) ** 2
-            self.growf = self.growf / dens_mod 
+            dens_mod = (self.density * 3) ** 2
+            self.growf = self.growf / dens_mod  # this is a pretty aggressive approach
 
     def wealth_up(self):
         self.wealth += (self.wealth * 0.1)
@@ -217,5 +217,6 @@ if __name__ == "__main__":
 
     pops_df = city_df.filter(regex='Pop')
     print(pops_df.tail(5))
-    pops_df.plot()
+   
+    pops_df.plot.line()
     plt.show()
