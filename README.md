@@ -40,3 +40,6 @@ NB: Suburb density not mapped to alpha in this example
 1. The coverage of services, suburb density and the level of wealth determines happiness levels
 happiness levels determine growth factor
 
+2. GrowthFactor needs positive modifiers to counter density effect
+
+
