@@ -2,30 +2,40 @@
 # city.py
 #
 
-Toy city simulator for practicing classes, modules, PEP 8 and version control
+Toy parametric city simulator for practicing classes, modules, PEP 8 and version control
+
+Project History:
+
+I wanted to play with while loops so I made this function:
+
+    def grow():
+        ournumber = 0
+        while ournumber < 10:
+            ournumber += 1
+
+From there I made a function to check if ournumber was currently 10...
+Then I set conditions to be satisfied before growth could occur eg:
+    if something:
+        grow()
+Around this point I started imagining ournumber as a city's population, and from this basic framework I began expanding...
+
 
 MODULES:
-
-    service_classes.py - this is where I began, just revising classes, with some basic city services like police and fire.
-
+    city.py - the mostly text driven script to put it all together.
+    
     suburbs.py - contains methods and data for suburbs class.
+        performs the expand suburb function - the bulk of the work
+        records suburb attributes to pandas dataframe each iteration (day)
 
     grid_maker.py - makes a 10x10 numpy meshgrid and performs plotting of suburbs.
+        refers to dictionaries in suburbs.py for size, density and coords
 
-    city.py - the mostly text driven script to put it all together.
+    service_classes.py - this is where I began, just revising classes, with some basic city services like police and fire.
+        currently still unused
 
 
 
 TODO:
-    ~~When suburb size reaches a set level, a new suburb will automatically be generated nearby~~
-    The coverage of services and the level of wealth determines happiness levels
+    The coverage of services, suburb density and the level of wealth determines happiness levels
+        happiness levels determine growth factor
 
-
-
-
-TBD
-    USER OPTIONS
-        (B)uild
-        (T)axes
-        (F)und
-        (P)rogress
