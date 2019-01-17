@@ -42,7 +42,7 @@ class Suburb:
         subs_size_dict[self.name] = self.size
 
     def update_density(self):
-        # TODO: determine calc for density
+        self.density = min((self.pop / (expand_limit * 150)), 1)  # FIXME: ???
         subs_dens_dict[self.name] = self.density
 
     def wealth_up(self):
@@ -176,7 +176,7 @@ def expand_suburbs():
         if s.size < expand_limit:
             s.grow_pop(rate=growth_fac)
             s.update_size()
-            s.update_density
+            s.update_density()
         elif (s.size >= expand_limit) and s not in full_suburbs:
             make_adj_suburb(s)
             full_suburbs.append(s)
@@ -199,6 +199,7 @@ if __name__ == "__main__":
         expand_suburbs()
 
     print("City ran for " + str(current_day) + " days")
+    print(subs_dens_dict)
     print(city_df.head(5))
     print(city_df.tail(5))
     print(city_df.iloc[49])
