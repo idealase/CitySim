@@ -17,7 +17,6 @@ subs_size_dict = {}
 
 current_day = 0
 
-suburbs_df = pd.DataFrame()
 
 city_df = pd.read_csv('City_Records_Template.csv')
 city_df.set_index('Day', drop=True, inplace=True)
@@ -58,27 +57,6 @@ class Suburb:
         """Shrinks population at specified rate; eg rate=0.1 is equal to 10% shrinkage"""
         self.pop -= (self.pop * rate)
 
-    def insert_to_df(self):
-        sub_name_pop = str(self.name) + ' Pop.'
-        suburbs_df.insert(0, sub_name_pop, self.pop)
-
-        sub_name_size = str(self.name) + ' Size.'
-        suburbs_df.insert(1, sub_name_size, self.size)
-
-        sub_name_wealth = str(self.name) + ' Wealth.'
-        suburbs_df.insert(2, sub_name_wealth, self.wealth)
-
-    def append_to_df(self):
-        # TODO: Fix this. doesnt work
-        sub_name_pop = str(self.name) + ' Pop.'
-        suburbs_df.append(sub_name_pop, self.pop)
-
-        sub_name_size = str(self.name) + ' Size.'
-        suburbs_df.append(sub_name_size, self.size)
-
-        sub_name_wealth = str(self.name) + ' Wealth.'
-        suburbs_df.append(sub_name_wealth, self.wealth)
-
 
 def make_new_suburb():
     """Generates a new empty suburb with ZERO wealth
@@ -98,8 +76,6 @@ def make_new_suburb():
     # make new suburb object with that name
     new_sub = Suburb(new_suburb_name, 0, 0, 0, 0.1, new_coords, growth_fac)
     
-    # TODO: Consider removing this feature
-    new_sub.insert_to_df()  #FIXME: not doing anything
     
     city_suburbs.append(new_sub)
     subs_loc_dict[new_sub.name] = new_sub.coords
@@ -221,14 +197,12 @@ if __name__ == "__main__":
     make_new_suburb()
     print(new_sub.name, new_sub.pop, new_sub.wealth, new_sub.coords)
     new_sub.pop = 10
-    print(suburbs_df.head(5))
     print(city_df.head(5))
 
     for i in range(50):  # the value chosen here has unexpected effects on df performance???
         expand_suburbs()
 
     print("City ran for " + str(current_day) + " days")
-    print(suburbs_df.head(5))
     print(city_df.head(5))
     print(city_df.tail(5))
 
