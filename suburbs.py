@@ -4,7 +4,6 @@
 
 import random
 import pandas as pd
-import datetime
 import matplotlib.pyplot as plt
 
 # list of made up names to draw from when making new suburbs
@@ -26,7 +25,7 @@ city_df = pd.read_csv('City_Records_Template.csv')
 city_df.set_index('Day', drop=True, inplace=True)
 
 # suburb growth params
-growth_fac = 0.3  # set between 0 and 1
+growth_fac = 0.2  # set between 0 and 1
 expand_limit = 20  # size at which suburb stops expanding and makes new suburb
 density_thresh = 0.51
 
@@ -216,7 +215,10 @@ if __name__ == "__main__":
     city_df.to_csv(test_csv_name)
 
     pops_df = city_df.filter(regex='Pop')
+    pops_df.replace("", 0, inplace=True)
+
+    print(pops_df.head(5))
     print(pops_df.tail(5))
    
-    pops_df.plot.line()
+    pops_df.plot()
     plt.show()
