@@ -1,10 +1,10 @@
 # CitySim
-## Toy parametric city simulator for practicing classes, modules, PEP 8 and version control
+### Toy parametric city simulator for practicing classes, modules, PEP 8 and version control
 
 #### Dependencies:
     The scipy packages pandas, numpy and matplotlib
     
-### MODULES:
+#### MODULES:
 + city.py - the mostly text driven script to put it all together.
     
 + suburbs.py - contains methods and data for suburbs class.
@@ -17,7 +17,8 @@
 + service_classes.py - this is where I began, just revising classes, with some basic city services like police and fire.
     currently still unused
     
-### Running CitySim:
+#### Running CitySim:
+  
     RUN city.py for basic functionality
         You will be prompted for your name and the city's name
         The difficulty prompt is currently pointless, so you can select 'hard'
@@ -26,7 +27,9 @@
     Running grid_maker.py will check grid functionality, but all suburbs on grid will have size:0
 
 ### Example Plot:
+    
     NB: Suburb density not mapped to alpha in this example
+    
 ![image](https://user-images.githubusercontent.com/24471071/51315742-2f51ab80-1a53-11e9-9cb0-c72499380215.png)
 
 ### TODO:
