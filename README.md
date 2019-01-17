@@ -15,7 +15,7 @@
     currently still unused
 
 
-![alt text](ex_plot.png "Description goes here")
+![image](https://user-images.githubusercontent.com/24471071/51315742-2f51ab80-1a53-11e9-9cb0-c72499380215.png)
 
 ### TODO:
 1. The coverage of services, suburb density and the level of wealth determines happiness levels
