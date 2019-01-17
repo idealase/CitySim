@@ -125,4 +125,7 @@ docker-compose.debug.yml
 docker-compose.yml
 Dockerfile
 
+# dataframe tests
+city_df_tests/
+
 # End of https://www.gitignore.io/api/windows,pycharm

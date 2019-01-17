@@ -28,12 +28,14 @@ growth_fac = 0.3  # set between 0 and 1
 expand_limit = 20  # size at which suburb stops expanding and makes new suburb
 
 class Suburb:
-    def __init__(self, name, pop, wealth, size, coords):
+    def __init__(self, name, pop, wealth, size, density, coords, growf):
         self.name = name
         self.pop = pop
         self.wealth = wealth
         self.size = size
+        self.density = density
         self.coords = coords
+        self.growf = growf
 
     def update_size(self):
         self.size = self.pop / 100
@@ -94,7 +96,7 @@ def make_new_suburb():
     new_coords = (random.randint(-2,2), random.randint(-2,2))
     
     # make new suburb object with that name
-    new_sub = Suburb(new_suburb_name, 0, 0, 0, new_coords)
+    new_sub = Suburb(new_suburb_name, 0, 0, 0, 0.1, new_coords, growth_fac)
     
     # TODO: Consider removing this feature
     new_sub.insert_to_df()  #FIXME: not doing anything
@@ -166,7 +168,7 @@ def make_adj_suburb(adj_to):
     rand_init_pop = random.randint(25, 100)
 
     # make new suburb object with that name
-    new_sub = Suburb(new_suburb_name, rand_init_pop, 0, 0, new_coords)
+    new_sub = Suburb(new_suburb_name, rand_init_pop, 0, 0, 0.2, new_coords, growth_fac)
     # TODO: Create new pd df for new adjacent suburb... ?? maybe not
 
     city_suburbs.append(new_sub)
@@ -174,12 +176,11 @@ def make_adj_suburb(adj_to):
     subs_size_dict[new_sub.name] = new_sub.size
 
     # assiging new cols to city_df for new suburb
-    city_df[str(new_sub.name) + " Pop."] = ""
-    city_df[str(new_sub.name) + " Wealth"] = ""
-    city_df[str(new_sub.name) + " Size"] = ""
-    city_df[str(new_sub.name) + " Density"] = ""
-    city_df[str(new_sub.name) + " GrowthFac"] = ""
+    first_cols = [" Pop.", " Wealth", " Size", " Density", " GrowthFac"]
 
+    for col in first_cols:
+        city_df[str(new_sub.name) + col] = ""
+   
 
 def expand_suburbs():
     """Makes suburbs expand proportional to global growth factor
@@ -189,17 +190,16 @@ def expand_suburbs():
     """
     global current_day
     current_day +=1
+
     print("\nCity Suburb Summary:")
     for s in city_suburbs:
         print(s.name, "\tPopulation: " + str(s.pop), sep="...")  # TODO: remove this when finished testing
-        # TODO: Store all suburb attributes in pandas SUBURBS DATAFRAMES at this point
-        # FIXME: this isn't working... related to no. iterations????
-        city_df.loc[str(current_day), (str(s.name) + " Pop.")] = s.pop
-        city_df.loc[str(current_day), (str(s.name) + " Wealth")] = s.wealth
-        city_df.loc[str(current_day), (str(s.name) + " Size")] = s.size
-        city_df.loc[str(current_day), (str(s.name) + " GrowthFac")] = growth_fac
-
-
+    
+    # FIXME: this isn't working... related to no. iterations????
+    for s in city_suburbs:
+        cols_dict = {s.pop: " Pop.", s.wealth: " Wealth", s.size: " Size", s.density: " Density", s.growf: " GrowthFac"}
+        for k,v in cols_dict.items():
+            city_df.loc[str(current_day), (str(s.name) + str(v))] = k
 
     for s in city_suburbs:
         if s.size < expand_limit:
