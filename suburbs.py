@@ -208,14 +208,29 @@ if __name__ == "__main__":
     print(city_df.tail(5))
     print(city_df.iloc[49])
     
+    # save test csv
     test_csv_name = 'city_df_tests/test.csv'
-    city_df.to_csv(test_csv_name)
+    city_df.to_csv(test_csv_name)  
+
+    city_df.replace("", 0, inplace=True)
 
     pops_df = city_df.filter(regex='Pop')
-    pops_df.replace("", 0, inplace=True)
+    density_df = city_df.filter(regex='Density')
+    growf_df = city_df.filter(regex='Grow')
+    wealth_df = city_df.filter(regex='Wealth')
+
 
     print(pops_df.head(5))
     print(pops_df.tail(5))
-   
+
+   # plt.figure(figsize=(10,10))
+    #plt.subplot(2,2,1) 
     pops_df.plot()
+    #plt.subplot(2,2,2) 
+    growf_df.plot()
+    #plt.subplot(2,2,3) 
+    #wealth_df.plot()
+    #plt.subplot(2,2,4) 
+    density_df.plot()
+
     plt.show()
