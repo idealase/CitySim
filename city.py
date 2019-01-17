@@ -75,7 +75,7 @@ mayor_name = input("What is your name?\n")
 print("Welcome to your new city, Mayor " + mayor_name)
 city_name = input("\nWhat would you like the city to be called?\n")
 
-waste_time = True
+waste_time = False
 welcome_msg = str("\n\nOk, Mayor " + mayor_name + ". Behold...\n   \n" + "***The City of " + city_name + "***\n\n")
 if waste_time:
     for char in welcome_msg:

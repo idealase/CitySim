@@ -14,6 +14,7 @@ city_suburbs = []
 full_suburbs = []
 subs_loc_dict = {}
 subs_size_dict = {}
+subs_dens_dict = {}
 
 current_day = 0
 
@@ -41,7 +42,8 @@ class Suburb:
         subs_size_dict[self.name] = self.size
 
     def update_density(self):
-        pass  # TODO: determine calc for density
+        # TODO: determine calc for density
+        subs_dens_dict[self.name] = self.density
 
     def wealth_up(self):
         self.wealth += (self.wealth * 0.1)
@@ -78,6 +80,7 @@ def make_new_suburb():
     city_suburbs.append(new_sub)
     subs_loc_dict[new_sub.name] = new_sub.coords
     subs_size_dict[new_sub.name] = new_sub.size
+    subs_dens_dict[new_sub.name] = new_sub.density
 
     # replacing template column names with those of new suburb
     city_df.rename(index=str, columns={"Sub1 Pop": str(new_sub.name) + " Pop.", "Sub1 Wealth": str(new_sub.name) + " Wealth", \
@@ -142,6 +145,7 @@ def make_adj_suburb(adj_to):
     city_suburbs.append(new_sub)
     subs_loc_dict[new_sub.name] = new_sub.coords
     subs_size_dict[new_sub.name] = new_sub.size
+    subs_dens_dict[new_sub.name] = new_sub.density
 
     # assiging new cols to city_df for new suburb
     new_cols = [" Pop.", " Wealth", " Size", " Density", " GrowthFac"]
@@ -172,6 +176,7 @@ def expand_suburbs():
         if s.size < expand_limit:
             s.grow_pop(rate=growth_fac)
             s.update_size()
+            s.update_density
         elif (s.size >= expand_limit) and s not in full_suburbs:
             make_adj_suburb(s)
             full_suburbs.append(s)
