@@ -4,6 +4,8 @@
 
 import random
 import pandas as pd
+import datetime
+import matplotlib.pyplot as plt
 
 # list of made up names to draw from when making new suburbs
 # I try and add one every now and then
@@ -202,7 +204,7 @@ if __name__ == "__main__":
     new_sub.pop = 10
     print(city_df.head(5))
 
-    for i in range(50):  # the value chosen here has unexpected effects on df performance???
+    for i in range(55):  # the value chosen here has unexpected effects on df performance???
         expand_suburbs()
 
     print("City ran for " + str(current_day) + " days")
@@ -210,5 +212,10 @@ if __name__ == "__main__":
     print(city_df.head(5))
     print(city_df.tail(5))
     print(city_df.iloc[49])
+    test_csv_name = 'city_df_tests/test.csv'
+    city_df.to_csv(test_csv_name)
 
-    city_df.to_csv('city_df_tests/test.csv')
+    pops_df = city_df.filter(regex='Pop')
+    print(pops_df.tail(5))
+    pops_df.plot()
+    plt.show()
