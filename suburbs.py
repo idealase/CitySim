@@ -28,11 +28,12 @@ growth_fac = 0.3  # set between 0 and 1
 expand_limit = 20  # size at which suburb stops expanding and makes new suburb
 
 class Suburb:
-    def __init__(self, name, pop, wealth, size, coords, growf):
+    def __init__(self, name, pop, wealth, size, density, coords, growf):
         self.name = name
         self.pop = pop
         self.wealth = wealth
         self.size = size
+        self.density = density
         self.coords = coords
         self.growf = growf
 
@@ -95,7 +96,7 @@ def make_new_suburb():
     new_coords = (random.randint(-2,2), random.randint(-2,2))
     
     # make new suburb object with that name
-    new_sub = Suburb(new_suburb_name, 0, 0, 0, new_coords, growth_fac)
+    new_sub = Suburb(new_suburb_name, 0, 0, 0, 0.1, new_coords, growth_fac)
     
     # TODO: Consider removing this feature
     new_sub.insert_to_df()  #FIXME: not doing anything
@@ -167,7 +168,7 @@ def make_adj_suburb(adj_to):
     rand_init_pop = random.randint(25, 100)
 
     # make new suburb object with that name
-    new_sub = Suburb(new_suburb_name, rand_init_pop, 0, 0, new_coords, growth_fac)
+    new_sub = Suburb(new_suburb_name, rand_init_pop, 0, 0, 0.2, new_coords, growth_fac)
     # TODO: Create new pd df for new adjacent suburb... ?? maybe not
 
     city_suburbs.append(new_sub)
@@ -190,16 +191,13 @@ def expand_suburbs():
     global current_day
     current_day +=1
 
-
-
-
     print("\nCity Suburb Summary:")
     for s in city_suburbs:
         print(s.name, "\tPopulation: " + str(s.pop), sep="...")  # TODO: remove this when finished testing
     
     # FIXME: this isn't working... related to no. iterations????
     for s in city_suburbs:
-        cols_dict = {s.pop: " Pop.", s.wealth: " Wealth", s.size: " Size", s.growf: " GrowthFac"}
+        cols_dict = {s.pop: " Pop.", s.wealth: " Wealth", s.size: " Size", s.density: " Density", s.growf: " GrowthFac"}
         for k,v in cols_dict.items():
             city_df.loc[str(current_day), (str(s.name) + str(v))] = k
 
