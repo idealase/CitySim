@@ -6,8 +6,9 @@ import random
 import pandas as pd
 
 # list of made up names to draw from when making new suburbs
+# I try and add one every now and then
 suburb_names = ["Weablo", "Glemdor", "Quamlack", "Tistle", "Marlbornry", "Flantiline", "Tennerbro", "Gwizzly", "Howerton",
-                "Norlop", "Streeves", "Bannawack", "Terrawom", "Glable", "Karenton", "Glebulp", "Nennafet", "Seeply"]
+                "Norlop", "Streeves", "Bannawack", "Terrawom", "Glable", "Karenton", "Glebulp", "Nennafet", "Seeply", "Lamaton", "Woorap"]
 
 # init lists/dicts for suburb features
 city_suburbs = []
@@ -26,6 +27,7 @@ city_df.set_index('Day', drop=True, inplace=True)
 # TODO: make growth_fac a suburb specific attribute
 growth_fac = 0.3  # set between 0 and 1
 expand_limit = 20  # size at which suburb stops expanding and makes new suburb
+density_thresh = 0.51
 
 class Suburb:
     def __init__(self, name, pop, wealth, size, density, coords, growf):
@@ -42,8 +44,13 @@ class Suburb:
         subs_size_dict[self.name] = self.size
 
     def update_density(self):
-        self.density = min((self.pop / (expand_limit * 150)), 1)  # FIXME: ???
+        self.density = min((self.pop / (expand_limit * 150)), 1) 
         subs_dens_dict[self.name] = self.density
+
+    def update_growf(self):
+        if self.density > density_thresh:
+            dens_mod = (self.density * 2) ** 2
+            self.growf = self.growf / dens_mod 
 
     def wealth_up(self):
         self.wealth += (self.wealth * 0.1)
@@ -177,6 +184,7 @@ def expand_suburbs():
             s.grow_pop(rate=growth_fac)
             s.update_size()
             s.update_density()
+            s.update_growf()
         elif (s.size >= expand_limit) and s not in full_suburbs:
             make_adj_suburb(s)
             full_suburbs.append(s)
