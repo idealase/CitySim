@@ -29,8 +29,8 @@ growth_fac = 0.2  # set between 0 and 1
 expand_limit = 20  # size at which suburb stops expanding and makes new suburb
 density_thresh = 0.51
 
-base_wealth = 10
-wealth_growf = 0.05
+base_wealth = 2
+wealth_growf = 0.01
 
 class Suburb:
     def __init__(self, name, pop, wealth, size, density, coords, growf):
@@ -54,9 +54,10 @@ class Suburb:
         if self.density > density_thresh:
             dens_mod = ((self.density * 2) ** 4) / 1000
             self.growf -= dens_mod
-        self.growf += (self.wealth / 100) 
+        #wealth_mod = (self.wealth / 100)
+        #self.growf += wealth_mod  #FIXME this line is breaking python
 
-    def wealth_up(self):
+    def update_wealth(self):
         self.wealth += (self.wealth * wealth_growf)
 
     def advertise(self):
@@ -69,7 +70,7 @@ class Suburb:
 
     def full_grow_pop(self):
         """A slowed growth rate for full suburbs - grows pop. according to suburb growth factor w/ penalty"""
-        self.pop = int((self.pop * (0.7 + self.growf)))
+        self.pop = int((self.pop * (0.8 + self.growf)))
 
 
 
@@ -183,7 +184,7 @@ def expand_suburbs():
             s.update_size()
             s.update_density()
             s.update_growf()
-            s.wealth_up()
+            s.update_wealth()
         elif (s.size >= expand_limit) and s not in full_suburbs:
             make_adj_suburb(s)
             full_suburbs.append(s)
@@ -193,7 +194,7 @@ def expand_suburbs():
         s.update_size()
         s.update_density()
         s.update_growf()
-        s.wealth_up()
+        s.update_wealth()
 
 
 def see_city_suburbs():
@@ -237,6 +238,3 @@ if __name__ == "__main__":
     print(city_df.head(5))
     print(city_df.tail(5))
     print(city_df.iloc[49])
-
-    print(pops_df.head(5))
-    print(pops_df.tail(5))
