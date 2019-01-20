@@ -203,6 +203,26 @@ def see_city_suburbs():
         print(s.name, "Population: " + str(s.pop), "Wealth: " + str(s.wealth), "Size: " + str(s.size), "Location: " + str(s.coords), sep="...")
 
 
+
+
+def plotinfo(title):
+    # Dataframe manipulation
+    city_df.replace("", 0, inplace=True)
+    pops_df = city_df.filter(regex='Pop')
+    density_df = city_df.filter(regex='Density')
+    growf_df = city_df.filter(regex='Grow')
+    wealth_df = city_df.filter(regex='Wealth')
+
+    plt.figure(1, figsize=(10,10))
+    fig, axes = plt.subplots(nrows=2, ncols=2, num=1)
+    fig.suptitle(str(title) + ' Suburb History', fontsize=16)
+    pops_df.plot(ax=axes[0,0])
+    growf_df.plot(ax=axes[0,1])
+    wealth_df.plot(ax=axes[1,0])
+    density_df.plot(ax=axes[1,1])
+    plt.show()
+
+
 if __name__ == "__main__":
     print("main\n Testing dfs")
     make_new_suburb()
@@ -218,28 +238,6 @@ if __name__ == "__main__":
     print(city_df.head(5))
     print(city_df.tail(5))
     print(city_df.iloc[49])
-    
-    # save test csv
-    test_csv_name = 'city_df_tests/test.csv'
-    city_df.to_csv(test_csv_name)  
-
-    city_df.replace("", 0, inplace=True)
-
-    pops_df = city_df.filter(regex='Pop')
-    density_df = city_df.filter(regex='Density')
-    growf_df = city_df.filter(regex='Grow')
-    wealth_df = city_df.filter(regex='Wealth')
-
 
     print(pops_df.head(5))
     print(pops_df.tail(5))
-
-    plt.figure(1, figsize=(10,10))
-    fig, axes = plt.subplots(nrows=2, ncols=2, num=1)
-
-    pops_df.plot(ax=axes[0,0])
-    growf_df.plot(ax=axes[0,1])
-    wealth_df.plot(ax=axes[1,0])
-    density_df.plot(ax=axes[1,1])
-
-    plt.show()

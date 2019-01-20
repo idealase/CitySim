@@ -156,8 +156,10 @@ def keep_going():
             print("Total population of " + city_name + " reached " + str(tot_pop()))
         except TypeError:
             pass  #TODO: not do this
+        plotinfo(city_name)
         print("\nThe End!")
     else:
+        plotinfo(city_name)
         print("\nThe End!")
 
 
