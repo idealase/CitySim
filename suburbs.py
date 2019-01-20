@@ -53,13 +53,11 @@ class Suburb:
     def update_growf(self):
         if self.density > density_thresh:
             dens_mod = ((self.density * 2) ** 4) / 1000
-            self.growf -= dens_mod 
+            self.growf -= dens_mod
+        self.growf += (self.wealth / 100) 
 
     def wealth_up(self):
         self.wealth += (self.wealth * wealth_growf)
-
-    def wealth_down(self):
-        self.wealth -= (self.wealth * wealth_growf)
 
     def advertise(self):
         "Initialises suburb population when in city.py"
@@ -73,9 +71,6 @@ class Suburb:
         """A slowed growth rate for full suburbs - grows pop. according to suburb growth factor w/ penalty"""
         self.pop = int((self.pop * (0.7 + self.growf)))
 
-    def shrink_pop(self, rate):
-        """Shrinks population at specified rate; eg rate=0.1 is equal to 10% shrinkage"""
-        self.pop -= (self.pop * rate)
 
 
 def make_new_suburb():
