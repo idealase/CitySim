@@ -51,7 +51,7 @@ Running grid_maker.py will check grid functionality, but all suburbs on grid wil
 
 #### Example Info Plot:
 
-![image](https://user-images.githubusercontent.com/24471071/51438968-c7e66680-1cb3-11e9-8231-ae4cec70f6be.PNG)
+![image](https://user-images.githubusercontent.com/24471071/51439208-26f9aa80-1cb7-11e9-9e48-a464de0c4cc6.PNG)
 
 
 
