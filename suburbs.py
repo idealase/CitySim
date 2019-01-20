@@ -65,9 +65,13 @@ class Suburb:
         "Initialises suburb population when in city.py"
         self.pop += 50
 
-    def grow_pop(self, rate):
-        """Grows population at specified rate; eg rate=0.1 is equal to 10% growth"""
-        self.pop += int((self.pop * rate))
+    def grow_pop(self):
+        """Grows population according to suburb growth factor"""
+        self.pop = int((self.pop * (1 + self.growf)))
+
+    def full_grow_pop(self):
+        """A slowed growth rate for full suburbs - grows pop. according to suburb growth factor w/ penalty"""
+        self.pop = int((self.pop * (0.7 + self.growf)))
 
     def shrink_pop(self, rate):
         """Shrinks population at specified rate; eg rate=0.1 is equal to 10% shrinkage"""
@@ -180,7 +184,7 @@ def expand_suburbs():
 
     for s in city_suburbs:
         if s.size < expand_limit:
-            s.grow_pop(rate=growth_fac)
+            s.grow_pop()
             s.update_size()
             s.update_density()
             s.update_growf()
@@ -190,7 +194,7 @@ def expand_suburbs():
             full_suburbs.append(s)
 
     for s in full_suburbs:
-        s.grow_pop(rate=(growth_fac / 10))
+        s.full_grow_pop()
         s.update_size()
         s.update_density()
         s.update_growf()
