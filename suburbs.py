@@ -30,7 +30,7 @@ expand_limit = 20  # size at which suburb stops expanding and makes new suburb
 density_thresh = 0.51
 
 base_wealth = 10
-wealth_growf = 0.01
+wealth_growf = 0.05
 
 class Suburb:
     def __init__(self, name, pop, wealth, size, density, coords, growf):
@@ -190,7 +190,7 @@ def expand_suburbs():
             full_suburbs.append(s)
 
     for s in full_suburbs:
-        s.grow_pop(rate=(growth_fac / 5))
+        s.grow_pop(rate=(growth_fac / 10))
         s.update_size()
         s.update_density()
         s.update_growf()
@@ -234,14 +234,12 @@ if __name__ == "__main__":
     print(pops_df.head(5))
     print(pops_df.tail(5))
 
-   # plt.figure(figsize=(10,10))
-    #plt.subplot(2,2,1) 
-    pops_df.plot()
-    #plt.subplot(2,2,2) 
-    growf_df.plot()
-    #plt.subplot(2,2,3) 
-    wealth_df.plot()
-    #plt.subplot(2,2,4) 
-    density_df.plot()
+    plt.figure(1, figsize=(10,10))
+    fig, axes = plt.subplots(nrows=2, ncols=2, num=1)
+
+    pops_df.plot(ax=axes[0,0])
+    growf_df.plot(ax=axes[0,1])
+    wealth_df.plot(ax=axes[1,0])
+    density_df.plot(ax=axes[1,1])
 
     plt.show()
