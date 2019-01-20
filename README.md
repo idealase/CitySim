@@ -45,11 +45,16 @@ Running grid_maker.py will check grid functionality, but all suburbs on grid wil
     
     not sure how to incorporate these objects into each suburb so they meaningfully alter parameters
 
-#### Example Plot:
+#### Example Plot of City:
     
-NB: Suburb density not mapped to alpha in this example
-    
-![image](https://user-images.githubusercontent.com/24471071/51315742-2f51ab80-1a53-11e9-9cb0-c72499380215.png)
+![image](https://user-images.githubusercontent.com/24471071/51438974-e51b3500-1cb3-11e9-854c-81ad1ae33688.PNG)
+
+#### Example Info Plot:
+
+![image](https://user-images.githubusercontent.com/24471071/51438968-c7e66680-1cb3-11e9-8231-ae4cec70f6be.PNG)
+
+
+
 
 #### TODO:
 1. The coverage of services, suburb density and the level of wealth determines happiness levels
