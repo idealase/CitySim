@@ -118,6 +118,7 @@ __pycache__/
 
 # unused files
 svc_buildingclass.py
+whilerec.py
 
 # docker
 .dockerignore
