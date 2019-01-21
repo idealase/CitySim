@@ -20,7 +20,6 @@ subs_dens_dict = {}
 
 current_day = 0
 
-
 city_df = pd.read_csv('City_Records_Template.csv')
 city_df.set_index('Day', drop=True, inplace=True)
 
@@ -28,7 +27,6 @@ city_df.set_index('Day', drop=True, inplace=True)
 growth_fac = 0.2  # set between 0 and 1
 expand_limit = 20  # size at which suburb stops expanding and makes new suburb
 density_thresh = 0.51
-
 base_wealth = 2
 wealth_growf = 0.01
 
@@ -36,11 +34,11 @@ class Suburb:
     def __init__(self, name, pop, wealth, size, density, coords, growf):
         self.name = name
         self.pop = pop
-        self.wealth = wealth
+        self.wealth = base_wealth
         self.size = size
         self.density = density
         self.coords = coords
-        self.growf = growf
+        self.growf = growth_fac
 
     def update_size(self):
         self.size = self.pop / 100
@@ -180,21 +178,21 @@ def expand_suburbs():
 
     for s in city_suburbs:
         if s.size < expand_limit:
+            s.update_growf()
+            s.update_wealth()
             s.grow_pop()
             s.update_size()
             s.update_density()
-            s.update_growf()
-            s.update_wealth()
         elif (s.size >= expand_limit) and s not in full_suburbs:
             make_adj_suburb(s)
             full_suburbs.append(s)
 
     for s in full_suburbs:
+        s.update_growf()
+        s.update_wealth()
         s.full_grow_pop()
         s.update_size()
         s.update_density()
-        s.update_growf()
-        s.update_wealth()
 
 
 def see_city_suburbs():
