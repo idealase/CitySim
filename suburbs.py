@@ -52,6 +52,7 @@ class Suburb:
         if self.density > density_thresh:
             dens_mod = ((self.density * 2) ** 4) / 1000
             self.growf -= dens_mod
+        #self.growf += (1 / self.wealth)
         #wealth_mod = (self.wealth / 100)
         #self.growf += wealth_mod  #FIXME this line is breaking python
 
@@ -170,7 +171,6 @@ def expand_suburbs():
     global current_day
     current_day +=1
     
-    # FIXME: this isn't working... related to no. iterations????
     for s in city_suburbs:
         cols_dict = {s.pop: " Pop.", s.wealth: " Wealth", s.size: " Size", s.density: " Density", s.growf: " GrowthFac"}
         for k,v in cols_dict.items():
