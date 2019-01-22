@@ -19,15 +19,15 @@ def set_diff():
     """
     global money, diff_fac
     difficulty = input("How difficult do you want your game to be? Easy, medium or hard?").upper()
-    if difficulty == "EASY":
+    if difficulty == "EASY" or "E":
         diff_fac = 1  # TODO: make this mean something
         money = 1000000
         print("You have chosen: " + difficulty + "\nYou have $" + str(money))
-    elif difficulty == "MEDIUM":
+    elif difficulty == "MEDIUM" or "M":
         diff_fac = 2
         money = 500000
         print("You have chosen: " + difficulty + "\nYou have $" + str(money))
-    elif difficulty == "HARD":
+    elif difficulty == "HARD" or "H":
         diff_fac = 4
         money = 250000
         print("You have chosen: " + difficulty + "\nYou have $" + str(money))
@@ -56,7 +56,6 @@ def market_suburb():
         market_suburb()
     
     
-
 def tot_pop():
     """
     Returns the total population of city
@@ -66,9 +65,6 @@ def tot_pop():
     for s in city_suburbs:
         tot_pop += s.pop
     return tot_pop
-
-
-
 
 
 mayor_name = input("What is your name?\n")
@@ -85,41 +81,26 @@ if waste_time:
 else:
     print(welcome_msg)
 
-
 set_diff()
 
-#time.sleep(2)
 print("\n\nLet's establish the first suburb of the city of " + city_name)
-
 make_new_suburb()
-#time.sleep(2)
 print("\nCongratulations, Mayor " + mayor_name + " your first suburb is...\n")
-#time.sleep(2)
-
 see_city_suburbs()
-#time.sleep(2)
 print("\nIt is empty of course...\n\nBut you can advertise your new suburb!\n")
 print("For every $1000 spent on marketing, 50 people will move into the suburb")
-#time.sleep(1)
 
 market_suburb()
 print("\nLet's see how that worked...\n")
-#time.sleep(2)
 
 see_city_suburbs()
-#time.sleep(1)
 
 print("\nSo now, " + str(city_suburbs[-1].pop) + " people live in " + city_suburbs[-1].name + "!!!\n")
-#time.sleep(1)
 print("But now you only have $" + str(money) + " left to spend!\n")
-#time.sleep(2)
 print("And " + str(city_suburbs[-1].name) + " now has a size of " + str(city_suburbs[-1].size) + "!!!")
-
-#time.sleep(2)
 print("\nTotal population of " + city_name + " is currently " + str(tot_pop()))
 
 show_city_prompt()
-
 
 def run_city():
     """
@@ -136,14 +117,18 @@ def run_city():
     run_days = int(input("How many days should we run the city for..?"))
 
     # for as many days as run_days, run the expand suburbs function
-    for i in range(run_days):
-        expand_suburbs()
+    try:
+        for i in range(run_days):
+            expand_suburbs()
+    except OverflowError:
+        print("Whoa slow down. OvErFloW")
+        run_city()
 
     show_city_prompt()
 
 
-run_city()
 
+run_city()
 
 def keep_going():
     global tot_pop
