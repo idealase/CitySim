@@ -130,6 +130,7 @@ def run_city():
 
 run_city()
 
+# TODO: check if this is the right spot to declare this
 def keep_going():
     global tot_pop
     cont_status = input("\nWould you like to keep going? y/n?")

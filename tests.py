@@ -1,4 +1,5 @@
-import unittest
+def function():
+    passimport unittest
 # from city import *
 from suburbs import *
 

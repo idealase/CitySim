@@ -18,7 +18,7 @@ subs_loc_dict = {}
 subs_size_dict = {}
 subs_dens_dict = {}
 
-current_day = 0
+current_day = 0  #TODO: not sure if current day should be declared here
 
 city_df = pd.read_csv('City_Records_Template.csv')
 city_df.set_index('Day', drop=True, inplace=True)
@@ -30,6 +30,11 @@ density_thresh = 0.51
 base_wealth = 2
 wealth_growf = 0.01
 
+# TODO: NUMPY conversions
+""" 
+How do I convert these operations to be a numpy operation?
+NFI!!!!
+"""
 class Suburb:
     def __init__(self, name, pop, wealth, size, density, coords, growf):
         self.name = name
@@ -55,6 +60,7 @@ class Suburb:
         #self.growf += (1 / self.wealth)
         #wealth_mod = (self.wealth / 100)
         #self.growf += wealth_mod  #FIXME this line is breaking python
+        # TODO: this is where the numpy conversions could be of use
 
     def update_wealth(self):
         self.wealth += (self.wealth * wealth_growf)
