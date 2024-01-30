@@ -11,7 +11,7 @@ RUN city.py for basic functionality
     
 You will be prompted for your name and the city's name
 The difficulty prompt is currently pointless, so you can select 'hard'
-When prompted for days to run city, 30 days is a nice amount (not 50000, Karen)
+When prompted for days to run city, 30 days is a nice amount (not 50000)
         
 Running suburbs.py and its main() will produce dataframes AND plots now. 
 These features are yet to be added to city.py
